@@ -22,7 +22,7 @@ function main() {
             updateTask();
             break;
         case "4":
-
+            deleteTask();
             break;
         default:
             console.log("Invalid option!");
@@ -64,5 +64,17 @@ function updateTask() {
     }
 }
 
+function deleteTask() {
+    const id = read.questionInt("Enter the project ID: ");
+
+    try {
+        const repo = new TaskRepository("./task.json");
+        repo.deleteTask(id)
+
+        console.log("Task deleted successfully!");
+    } catch (e) {
+        console.log("Error deleting task:", e.message);
+    }
+}
 
 main();

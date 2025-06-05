@@ -59,4 +59,27 @@ export default class TaskRepository {
 
         fs.writeFileSync(this.filePath, JSON.stringify(tasks, null, 2));
     }
+
+    deleteTask(taskId) {
+        let tasks = [];
+
+        if (fs.existsSync(this.filePath)) {
+            const fileContent = fs.readFileSync(this.filePath, "utf-8");
+            try {
+                tasks = JSON.parse(fileContent);
+            } catch (e) {
+                throw new Error("Error reading task file.");
+            }
+        }
+
+        const index = tasks.findIndex(t => t.id === taskId);
+        if (index === -1) {
+            throw new Error("Task not found.");
+        }
+
+        tasks.splice(index, 1);
+
+        fs.writeFileSync(this.filePath, JSON.stringify(tasks, null, 2));
+    }
+
 }
