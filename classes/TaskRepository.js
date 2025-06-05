@@ -29,6 +29,37 @@ export default class TaskRepository {
         fs.writeFileSync(this.filePath, JSON.stringify(tasks, null, 2));
     }
 
+    listTasks() {
+        if (!fs.existsSync(this.filePath)) {
+            console.log("No tasks found.");
+            return;
+        }
+
+        const fileContent = fs.readFileSync(this.filePath, "utf-8");
+        let tasks = [];
+
+        try {
+            tasks = JSON.parse(fileContent);
+        } catch (e) {
+            throw new Error("Error reading task file.");
+        }
+
+        if (tasks.length === 0) {
+            console.log("No tasks found.");
+            return;
+        }
+
+        console.log("=== Task list ===");
+        tasks.forEach(task => {
+            console.log(`ID: ${task.id}`);
+            console.log(`Name: ${task.name}`);
+            console.log(`Description: ${task.description}`);
+            console.log(`Status: ${task.status}`);
+            console.log("-------------------------");
+        });
+    }
+
+
     updateTask(taskId, updatedData) {
         let tasks = [];
 
@@ -80,6 +111,70 @@ export default class TaskRepository {
         tasks.splice(index, 1);
 
         fs.writeFileSync(this.filePath, JSON.stringify(tasks, null, 2));
+    }
+
+    listDoneTasks() {
+        if (!fs.existsSync(this.filePath)) {
+            console.log("No tasks found.");
+            return;
+        }
+
+        const fileContent = fs.readFileSync(this.filePath, "utf-8");
+        let tasks = [];
+
+        try {
+            tasks = JSON.parse(fileContent);
+        } catch (e) {
+            throw new Error("Error reading task file.");
+        }
+
+        const doneTasks = tasks.filter(task => task.status === "Done");
+
+        if (doneTasks.length === 0) {
+            console.log("No completed tasks found.");
+            return;
+        }
+
+        console.log("=== Completed Tasks (Done) ===");
+        doneTasks.forEach(task => {
+            console.log(`ID: ${task.id}`);
+            console.log(`Name: ${task.name}`);
+            console.log(`Description: ${task.description}`);
+            console.log(`Status: ${task.status}`);
+            console.log("-------------------------");
+        });
+    }
+
+    listInProgressTasks() {
+        if (!fs.existsSync(this.filePath)) {
+            console.log("No tasks found.");
+            return;
+        }
+
+        const fileContent = fs.readFileSync(this.filePath, "utf-8");
+        let tasks = [];
+
+        try {
+            tasks = JSON.parse(fileContent);
+        } catch (e) {
+            throw new Error("Error reading task file.");
+        }
+
+        const inProgressTasks = tasks.filter(task => task.status === "In progress");
+
+        if (inProgressTasks.length === 0) {
+            console.log("No in-progress tasks found.");
+            return;
+        }
+
+        console.log("=== In Progress Tasks ===");
+        inProgressTasks.forEach(task => {
+            console.log(`ID: ${task.id}`);
+            console.log(`Name: ${task.name}`);
+            console.log(`Description: ${task.description}`);
+            console.log(`Status: ${task.status}`);
+            console.log("-------------------------");
+        });
     }
 
 }

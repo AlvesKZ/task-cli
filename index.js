@@ -3,17 +3,19 @@ import Task from "./classes/Task.js";
 import TaskRepository from "./classes/TaskRepository.js";
 
 function main() {
-    console.log("Enter the number of the wanted service.");
-    console.log("1 - List tasks.");
+    console.log("1 - List all tasks.");
     console.log("2 - Create Task.");
     console.log("3 - Update Task.");
     console.log("4 - Delete Task.");
+    console.log("5 - List Done Tasks.");
+    console.log("6 - List In Progress Tasks.");
+
 
     const service = read.question();
 
     switch (service) {
         case "1":
-
+            listTask();
             break;
         case "2":
             createTask();
@@ -24,11 +26,17 @@ function main() {
         case "4":
             deleteTask();
             break;
+        case "5":
+            listDone();
+            break;
+        case "6":
+            listInProgress();
+            break;
         default:
             console.log("Invalid option!");
-
             break;
     }
+
 }
 
 function createTask() {
@@ -46,6 +54,11 @@ function createTask() {
     } catch (e) {
         console.log("Validation failed:", e.message);
     }
+}
+
+function listTask() {
+    const repo = new TaskRepository("./task.json");
+    repo.listTasks();
 }
 
 function updateTask() {
@@ -76,5 +89,16 @@ function deleteTask() {
         console.log("Error deleting task:", e.message);
     }
 }
+
+function listDone() {
+    const repo = new TaskRepository("./task.json");
+    repo.listDoneTasks();
+}
+
+function listInProgress() {
+    const repo = new TaskRepository("./task.json");
+    repo.listInProgressTasks();
+}
+
 
 main();
