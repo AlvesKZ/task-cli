@@ -1,5 +1,6 @@
 export default class Task {
     constructor(name, description, status) {
+        this.id = null;
         this.name = name;
         this.description = description;
         this.status = status;
@@ -16,6 +17,17 @@ export default class Task {
 
         if (!this.description) {
             throw new Error("The field 'description' can't be empty");
+        }
+
+        this.setStatus();
+    }
+
+    setStatus() {
+        if (this.status === "y") {
+            this.status = "Done";
+        }
+        if (this.status === "n") {
+            this.status = "In progress";
         }
     }
 

@@ -1,12 +1,14 @@
 [
   {
+    "id": 1,
     "name": "project 1",
     "description": "desc 1",
-    "status": "y"
+    "status": "Done"
   },
   {
     "name": "project 2",
     "description": "desc 2",
-    "status": "n"
+    "status": "Done",
+    "id": 2
   }
 ]
