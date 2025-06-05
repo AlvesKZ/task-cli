@@ -1,7 +1,6 @@
 import read from "readline-sync";
-import fs from "fs";
-import Task from "./Task";
-import TaskRepository from "./TaskRepository";
+import Task from "./classes/Task.js";
+import TaskRepository from "./classes/TaskRepository.js";
 
 function main() {
     const name = read.question("Enter the project name: ");
@@ -14,8 +13,9 @@ function main() {
 
         const repo = new TaskRepository("./task.json");
         repo.createTask(task.toJson());
+        console.log("Task created successfully!");
     } catch (e) {
-        console.log(e.message);
+        console.log("Validation failed:", e.message);
     }
 }
 

@@ -1,5 +1,12 @@
-{
-  "name": "fdsdh",
-  "description": "asfgfd",
-  "status": "s"
-},
+[
+  {
+    "name": "project 1",
+    "description": "desc 1",
+    "status": "y"
+  },
+  {
+    "name": "project 2",
+    "description": "desc 2",
+    "status": "n"
+  }
+]
